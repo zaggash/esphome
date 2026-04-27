@@ -17,6 +17,22 @@ number:
     power_level:
       name: Micronova Power level
       update_interval: 10s
+    memory_address_number:
+      - name: Memory Address Number Default
+        memory_location: 0x20
+        memory_address: 0x60
+        min_value: 0
+        max_value: 100
+        step: 1
+      - name: Memory Address Number Transform
+        id: my_memory_address_number_transform
+        memory_location: 0x20
+        memory_address: 0x80
+        min_value: 0.0
+        max_value: 50.0
+        step: 0.5
+        multiply: 0.5
+        offset: 10.0
 
 sensor:
   - platform: micronova
