@@ -119,3 +119,16 @@ async def to_code(config):
             step=1,
         )
         await to_code_micronova_listener(mv, numb, power_level_config)
+
+    for entry in config.get(CONF_MEMORY_ADDRESS_NUMBER, []):
+        register_micronova_writer()
+        numb = await number.new_number(
+            entry,
+            mv,
+            min_value=entry[CONF_MIN_VALUE],
+            max_value=entry[CONF_MAX_VALUE],
+            step=entry[CONF_STEP],
+        )
+        await to_code_micronova_listener(mv, numb, entry)
+        cg.add(numb.set_multiply(entry[CONF_MULTIPLY]))
+        cg.add(numb.set_offset(entry[CONF_OFFSET]))
